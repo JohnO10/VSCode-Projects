@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .strong {
+            color: #00ff00;
+        }
+        .moderate {
+            color: #ff8000;
+        }
+        .weak {
+            color: #ff0000;
+        }
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+        }
+        #download-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00bfff;
+            border: none;
+            border-radius: 4px;
+            color: #121212;
+            cursor: pointer;
+            display: none;
+        }
+        #download-btn:hover {
+            background-color: #0099cc;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Senhas</h1>
+        <label for="senha">Digite sua senha:</label>
+        <input type="password" id="senha" name="senha" oninput="gerarQRCode(); verificarForca();">
+        <p id="resultado"></p>
+        <div id="qrcode"></div>
+        <button id="download-btn" onclick="baixarQRCode()">Baixar QR Code</button>
+    </div>
+
+    <script>
+        function verificarForca() {
+            const senha = document.getElementById('senha').value;
+            const resultado = document.getElementById('resultado');
+            let forca = 0;
+
+            if (senha.length >= 16) forca++;
+            if (/[A-Z]/.test(senha)) forca++;
+            if (/[a-z]/.test(senha)) forca++;
+            if (/[0-9]/.test(senha)) forca++;
+            if (/[^A-Za-z0-9]/.test(senha)) forca++;
+
+            let nivelForca;
+            switch (forca) {
+                case 5:
+                    nivelForca = 'Muito forte';
+                    resultado.className = 'strong';
+                    break;
+                case 4:
+                    nivelForca = 'Forte';
+                    resultado.className = 'strong';
+                    break;
+                case 3:
+                    nivelForca = 'Moderada';
+                    resultado.className = 'moderate';
+                    break;
+                case 2:
+                    nivelForca = 'Fraca';
+                    resultado.className = 'weak';
+                    break;
+                default:
+                    nivelForca = 'Muito fraca';
+                    resultado.className = 'weak';
+            }
+
+            resultado.textContent = `Força da senha: ${nivelForca}`;
+        }
+
+        function gerarQRCode() {
+            const senha = document.getElementById('senha').value;
+            const qrcodeDiv = document.getElementById('qrcode');
+            qrcodeDiv.innerHTML = '';
+            new QRCode(qrcodeDiv, senha);
+            document.getElementById('download-btn').style.display = 'inline-block';
+        }
+
+        function baixarQRCode() {
+            const qrcodeCanvas = document.querySelector('#qrcode canvas');
+            const img = qrcodeCanvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = img;
+            link.download = 'qrcode.png';
+            link.click();
+        }
+    </script>
+</body>
+</html>
