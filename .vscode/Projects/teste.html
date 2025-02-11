@@ -61,16 +61,30 @@
     <div class="container">
         <h1>Gerador de Senhas</h1>
         <label for="senha">Digite sua senha:</label>
-        <input type="password" id="senha" name="senha" oninput="gerarQRCode(); verificarForca();">
+        <input type="password" id="senha" name="senha" oninput="handlePasswordInput()">
         <p id="resultado"></p>
         <div id="qrcode"></div>
         <button id="download-btn" onclick="baixarQRCode()">Baixar QR Code</button>
     </div>
 
     <script>
-        function verificarForca() {
-            const senha = document.getElementById('senha').value;
-            const resultado = document.getElementById('resultado');
+        const PASSWORD_STRENGTH = {
+            VERY_STRONG: 'Muito forte',
+            STRONG: 'Forte',
+            MODERATE: 'Moderada',
+            WEAK: 'Fraca',
+            VERY_WEAK: 'Muito fraca'
+        };
+
+        const STRENGTH_CLASSES = {
+            VERY_STRONG: 'strong',
+            STRONG: 'strong',
+            MODERATE: 'moderate',
+            WEAK: 'weak',
+            VERY_WEAK: 'weak'
+        };
+
+        function verificarForca(senha) {
             let forca = 0;
 
             if (senha.length >= 16) forca++;
@@ -79,34 +93,23 @@
             if (/[0-9]/.test(senha)) forca++;
             if (/[^A-Za-z0-9]/.test(senha)) forca++;
 
-            let nivelForca;
             switch (forca) {
-                case 5:
-                    nivelForca = 'Muito forte';
-                    resultado.className = 'strong';
-                    break;
-                case 4:
-                    nivelForca = 'Forte';
-                    resultado.className = 'strong';
-                    break;
-                case 3:
-                    nivelForca = 'Moderada';
-                    resultado.className = 'moderate';
-                    break;
-                case 2:
-                    nivelForca = 'Fraca';
-                    resultado.className = 'weak';
-                    break;
-                default:
-                    nivelForca = 'Muito fraca';
-                    resultado.className = 'weak';
+                case 5: return PASSWORD_STRENGTH.VERY_STRONG;
+                case 4: return PASSWORD_STRENGTH.STRONG;
+                case 3: return PASSWORD_STRENGTH.MODERATE;
+                case 2: return PASSWORD_STRENGTH.WEAK;
+                default: return PASSWORD_STRENGTH.VERY_WEAK;
             }
-
-            resultado.textContent = `Força da senha: ${nivelForca}`;
         }
 
-        function gerarQRCode() {
-            const senha = document.getElementById('senha').value;
+        function atualizarResultadoForca(senha) {
+            const resultado = document.getElementById('resultado');
+            const nivelForca = verificarForca(senha);
+            resultado.textContent = `Força da senha: ${nivelForca}`;
+            resultado.className = STRENGTH_CLASSES[nivelForca];
+        }
+
+        function gerarQRCode(senha) {
             const qrcodeDiv = document.getElementById('qrcode');
             qrcodeDiv.innerHTML = '';
             new QRCode(qrcodeDiv, senha);
@@ -120,6 +123,12 @@
             link.href = img;
             link.download = 'qrcode.png';
             link.click();
+        }
+
+        function handlePasswordInput() {
+            const senha = document.getElementById('senha').value;
+            atualizarResultadoForca(senha);
+            gerarQRCode(senha);
         }
     </script>
 </body>
