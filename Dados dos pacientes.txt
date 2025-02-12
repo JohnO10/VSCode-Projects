@@ -1,0 +1,77 @@
+
+
+Nome do paciente: Tatiane Oliveira
+Idade do paciente: 30
+Peso do paciente: 58.0
+Local do exame: abdomen
+O Kv é: 58.0
+O mAs dentro da grade é: 29.0
+O mAs fora da grade é: 19.333333333333332
+
+
+Nome do paciente: Lili
+Idade do paciente: 27
+Peso do paciente: 58.0
+Local do exame: torax
+O Kv é: 60.0
+O mAs dentro da grade é: 30.0
+O mAs fora da grade é: 20.0
+
+
+Nome do paciente: Jonatas Oliveira
+Idade do paciente: 27
+Peso do paciente: 77.89
+Local do exame: torax
+O Kv é: 56.8
+O mAs dentro da grade é: 28.4
+O mAs fora da grade é: 18.933333333333334
+
+
+Data e Hora: 2024-10-26 02:16:30
+Nome do paciente: Jonatas Oliveira
+Idade do paciente: 28
+Peso do paciente: 77.562
+Local do exame: cranio
+O Kv é: 46.0
+O mAs dentro da grade é: 23.0
+O mAs fora da grade é: 15.333333333333334
+
+
+Data e Hora: 2024-10-29 00:46:14
+Nome do paciente: Jonatas Oliveira
+Idade do paciente: 27
+Peso do paciente: 77.0
+Local do exame: torax
+O Kv é: 55.0
+O mAs dentro da grade é: 27.5
+O mAs fora da grade é: 18.333333333333332
+
+
+Data e Hora: 2024-10-29 00:46:22
+Nome do paciente: Jonatas Oliveira
+Idade do paciente: 27
+Peso do paciente: 77.0
+Local do exame: torax
+O Kv é: 55.0
+O mAs dentro da grade é: 27.5
+O mAs fora da grade é: 18.333333333333332
+
+
+Data e Hora: 2024-11-03 12:06:25
+Nome do paciente: Jonatas
+Idade do paciente: 27
+Peso do paciente: 80.0
+Local do exame: torax
+O Kv é: 56.0
+O mAs dentro da grade é: 28.0
+O mAs fora da grade é: 18.666666666666668
+
+
+Data e Hora: 2025-01-02 04:41:04
+Nome do paciente: Jonatas Oliveira
+Idade do paciente: 27
+Peso do paciente: 80.0
+Local do exame: extremidade
+O Kv é: 42.0
+O mAs dentro da grade é: 21.0
+O mAs fora da grade é: 14.0
